@@ -45,7 +45,7 @@ unsigned long getTotalRam(void){
     return totalRam;
 }
 
-unsigned long getFreeRam(){
+unsigned long getAvaibleRam(){
 
     FILE *memInfo = fopen("/proc/meminfo", "r");
 
@@ -62,6 +62,7 @@ unsigned long getFreeRam(){
     char* tempStr = (char *) malloc(MAX_BUFF);
 
     fgets(tempStr, sizeof(buffRead), memInfo); // jump to second line
+    fgets(tempStr, sizeof(buffRead), memInfo); // jump to Three line
 
     free(tempStr);
 
@@ -86,4 +87,11 @@ unsigned long getFreeRam(){
     freeRam = strtol(buffRead, NULL, 10);
 
     return freeRam;
+}
+
+unsigned long getUsedRam(){
+    long totalRam = getTotalRam();
+    long freeRam = getAvaibleRam();
+
+    return totalRam - freeRam;
 }
