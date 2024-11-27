@@ -1,3 +1,13 @@
+/*
+
+Copyright (c) 2024 Lithinium
+
+This code is licensed under the MIT license
+
+See the LICENSE File for Details
+
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>

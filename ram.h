@@ -1,3 +1,13 @@
+/*
+
+Copyright (c) 2024 Lithinium
+
+This code is licensed under the MIT license
+
+See the LICENSE File for Details
+
+*/
+
 #ifndef RAM_H
 #define RAM_H
 
