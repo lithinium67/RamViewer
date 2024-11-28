@@ -13,12 +13,14 @@ See the LICENSE File for Details
 #include <ctype.h>
 #include <stdlib.h>
 
-#include "ram.h"
-
 #define MAX_BUFF 64
 
 unsigned long getTotalRam(void){
    
+    char buffRead[MAX_BUFF];
+    
+    unsigned long totalRam;
+
     FILE *memInfo = fopen("/proc/meminfo", "r");
 
     if (!memInfo){
@@ -26,11 +28,6 @@ unsigned long getTotalRam(void){
 
         return 2;
     }
-
-    char buffRead[MAX_BUFF];
-
-    unsigned long totalRam;
-
 
 
     fseek(memInfo, 16, SEEK_SET);
