@@ -29,6 +29,19 @@ SOFTWARE.
 
 #define MAX_BUFF 64
 
+/* Remove 'Kb' at the end of the line read */
+static void removeKb(int length, char *string){
+    for (int i = length - 1; i >= 0; i--) {
+        if (!isdigit(string[i])) {
+            string[i] = '\0';
+        } else {
+            break;
+        }
+    }
+
+    return;
+}
+
 unsigned long getTotalRam(void){
    
     char buffRead[MAX_BUFF];
@@ -52,14 +65,7 @@ unsigned long getTotalRam(void){
     
     int buffLength = strlen(buffRead);
 
-    // remove " Kb"
-    for (int i = buffLength - 1; i >= 0; i--) {
-        if (!isdigit(buffRead[i])) {
-            buffRead[i] = '\0';
-        } else {
-            break;
-        }
-    }
+    removeKb(buffLength, buffRead);
 
     totalRam = strtol(buffRead, NULL, 10);
     
@@ -68,6 +74,12 @@ unsigned long getTotalRam(void){
 
 unsigned long getAvaibleRam(){
 
+    char buffRead[MAX_BUFF];
+
+    unsigned long freeRam;
+
+    char* tempStr = (char *) malloc(MAX_BUFF);
+    
     FILE *memInfo = fopen("/proc/meminfo", "r");
 
     if (!memInfo){
@@ -75,12 +87,6 @@ unsigned long getAvaibleRam(){
 
         return 2;
     }
-
-    char buffRead[MAX_BUFF];
-
-    unsigned long freeRam;
-
-    char* tempStr = (char *) malloc(MAX_BUFF);
 
     fgets(tempStr, sizeof(buffRead), memInfo); // jump to second line
     fgets(tempStr, sizeof(buffRead), memInfo); // jump to Three line
@@ -96,14 +102,7 @@ unsigned long getAvaibleRam(){
 
     int buffLength = strlen(buffRead);
 
-    // remove " Kb"
-    for (int i = buffLength - 1; i >= 0; i--) {
-        if (!isdigit(buffRead[i])) {
-            buffRead[i] = '\0';
-        } else {
-            break;
-        }
-    }
+    removeKb(buffLength, buffRead);
 
     freeRam = strtol(buffRead, NULL, 10);
 
