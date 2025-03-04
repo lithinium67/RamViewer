@@ -22,12 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdlib.h>
-
-#define MAX_BUFF 64
+#include <ram.h>
 
 /* Remove 'Kb' at the end of the line read */
 static void removeKb(int length, char *string){

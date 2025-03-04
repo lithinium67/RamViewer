@@ -25,6 +25,16 @@ SOFTWARE.
 #ifndef RAM_H
 #define RAM_H
 
+/* INCLUDES */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+/* DEFINES */
+
+#define MAX_BUFF 64
+
 /* Get the Total of the RAM in KiloBytes */
 unsigned long getTotalRam(void);
 /* Get the Total of the Avaible RAM in KiloBytes */
