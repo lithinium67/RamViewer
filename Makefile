@@ -3,10 +3,9 @@ CFLAGS = -I./include -Wall -Werror
 ARFLAGS = rcs
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
-LIBNAME = ramViewer-lib
-INCLUDE_DIR = include
+LIBNAME = ramViewer
 LIB_DIR = lib
-BUILD_DIR = build
+OBJS_DIR = objs
 
 .PHONY: all clean lib install
 
@@ -16,18 +15,18 @@ lib: $(LIB_DIR)/$(LIBNAME).a
 
 $(LIB_DIR)/$(LIBNAME).a: $(OBJ)
 	@mkdir -p $(LIB_DIR)
-	$(AR) $(ARFLAGS) $@ $^
+	ar $(ARFLAGS) $@ $^
 
 %.o: %.c
-	@mkdir -p $(BUILD_DIR)
+	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 install: lib
 	@mkdir -p /usr/local/lib
-	@mkdir -p /usr/local/include/mibiblioteca
+	@mkdir -p /usr/local/include/$(LIBNAME)
 	cp $(LIB_DIR)/$(LIBNAME).a /usr/local/lib/
-	cp $(INCLUDE_DIR)/*.h /usr/local/include/mibiblioteca/
+	cp include/*.h /usr/local/include/$(LIBNAME)/
 
 clean:
-	rm -rf $(BUILD_DIR) $(LIB_DIR) src/*.o
+	rm -rf $(OBJS_DIR) $(LIB_DIR) src/*.o
 
