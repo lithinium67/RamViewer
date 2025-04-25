@@ -22,9 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <ram.h>
+#ifndef RAM_H
+#define RAM_H
 
-/* Remove 'Kb' at the end of the line read */
+/* INCLUDES */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+/* DEFINES */
+
+#define MAX_BUFF 64
+
+/* Get the Total of the RAM in KiloBytes */
+unsigned long getTotalRam(void);
+/* Get the Total of the Avaible RAM in KiloBytes */
+unsigned long getAvaibleRam(void);
+/* Get the Total of the Used RAM in KiloBytes */
+unsigned long getUsedRam(void);
+
 static void removeKb(int length, char *string){
     for (int i = length - 1; i >= 0; i--) {
         if (!isdigit(string[i])) {
@@ -110,3 +127,6 @@ unsigned long getUsedRam(){
 
     return totalRam - freeRam;
 }
+
+
+#endif
